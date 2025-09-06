@@ -1,22 +1,26 @@
 package com.adwaitborate.Spring_Adwait;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringAdwaitApplication implements CommandLineRunner{
+public class SpringAdwaitApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringAdwaitApplication.class, args);
-	}
+    private final PaymentInterface pi;
 
-   @Autowired
-    private Razorpay razor;
+    // constructor injection
+    public SpringAdwaitApplication(PaymentInterface pi) {
+        this.pi = pi;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringAdwaitApplication.class, args);
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        String payhere= razor.payment();
-        System.out.println("Main function: "+ payhere);
+        String payhere = pi.pay();
+        System.out.println("Main function: " + payhere);
     }
 }
